@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title%} {{ title }} {% endblock %}
+
+{% block content%}
+<div class="container-fluid">
+    <div class="row" id="new-post-page">
+        <!-- left column -->
+        <div class="col-md-12">
+            <div id="content" class="">
+                <div class="w3-container w3-white w3-round mt-2" id="new-post"><br>
+                    <form method="POST" action=" {{ request.path }} " enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+
+                        <legend id="new-post-head"> {{ legend }} </legend>
+
+                        <div class="w3-margin" id="add-post-form">
+                            <div class="d-flex mb-2">
+                                <div>
+                                    <p class="">Category</p>
+                                    &nbsp;&nbsp;&nbsp;{{ form.category(class="btn btn-outline-info ")}}
+                                </div>
+                                <div>
+                                    <p class="">Sub Category</p>
+                                    &nbsp;&nbsp;&nbsp;{{ form.s_category(class="btn btn-outline-info ")}}
+                                </div>
+                            </div>
+                            {{ form.title(class_="w3-input w3-border w3-hover-border-teal w3-round-small ",placeholder="Post Title")}}
+                            {% for error in form.title.errors %}
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ error }}
+                            </div>
+                            {% endfor%}
+
+                            {{ form.body(class_="w3-input w3-border w3-hover-border-teal w3-round-small ",placeholder="Body")}}
+                            <input name="image" type="file" id="upload" class="hidden" onchange="">
+                            <div class="form-group mt-4">
+                                {{ form.postImage(class_="form-control-file") }}
+                                {% if form.postImage.errors %}
+                                {% for error in form.postImage.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{ error }}<br>
+                                </div>
+
+                                {% endfor%}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="text-center mr-4">
+                            <button class="btn w3-right btn-outline-primary rounded-pill" id="publish-post"
+                                type="submit">Publish
+                                post</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock%}

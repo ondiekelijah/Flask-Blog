@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title%} {{ title }} {% endblock %}
+
+{% block content%}
+<div class="blog-wrapper">
+  <div class="container-fluid-blog">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-9">
+        <div class="alerts mt-2">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+          {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+            <!-- <strong>Title</strong> --> {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+        </div>
+        <h1 class="latest-articles">
+          <span>Latest articles</span>
+        </h1>
+        <!-- <div class="search-results">
+          {% for result in results %}
+
+          {{ result.title }}
+
+          {% endfor %}
+        </div> -->
+        <div class="w3-row content">
+          {% for post in posts.items %}
+          <div id="content" class="w3-half w3-container">
+            <a href=" {{ url_for('blog.article',post_id = post.id ,uname = post.author.uname,slug = post.slug) }} ">
+              <img alt="post image" id="blog-post-image" class="w3-hover-opacity" loading="lazy"
+                src="/static/images/blog-posts/{{ post.postImage }}">
+            </a>
+            <div class="category-pill">
+              <button class="">{{ post.category }}</button>
+            </div>
+            <div id="post-header">
+              <h4 id="post-description-blog"> <a
+                  href="  {{ url_for('blog.article',post_id = post.id ,uname = post.author.uname,slug = post.slug) }} ">
+                  {{ post.title|safe }}
+                </a> </h4>
+              <p id="post-description-info" class=""><i class="fa fa-user w3-hide-small mr-2" aria-hidden="true"></i><a
+                  href=" {{ url_for('blog.profile',uname = post.author.uname ) }}"
+                  class="w3-hide-small">{{ post.author.fname }}
+                  {{ post.author.lname }}</a>
+                <i class="fa fa-clock-o mr-1" aria-hidden="true"></i>
+                {{ moment(post.date_posted).fromNow() }}&nbsp;.&nbsp;{{ post.views}}&nbsp;views&nbsp;
+                <i class="fa fa-comments mr-2" aria-hidden="true"></i> {{ post.count}}&nbsp;comment(s)
+              </p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="text-center">
+          {% for page_num in posts.iter_pages(left_edge =1,right_edge = 1,left_current =1,right_current =2) %}
+          {% if page_num %}
+          {% if posts.page == page_num %}
+          <a class="btn btn-outline-info w3-circle mr-1" id="page-active"
+            href="{{ url_for('blog.blog',page = page_num)}} ">{{ page_num}}
+          </a>
+          {% else %}
+          <a class="btn btn-outline-info w3-circle ml-1" id="page-inactive"
+            href="{{ url_for('blog.blog',page = page_num)}} ">{{ page_num}} </a>
+
+          {% endif %}
+          {% else %}
+          ...
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <!-- left column -->
+
+      <!-- right column -->
+
+      <div class="col-md-3 w3-hide-small" id="rightColumn">
+        <div>
+          <form action="/blog/search" method="POST">
+            <input type="text" name="sval" id="sval" class="w3-input w3-border" onfocus="this.value=''" placeholder="Type search here">
+            <button class="search-button w3-btn w3-blue w3-border" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="w3-card" id="sidenav-content-wrapper">
+          <div class="trending-posts">
+            <label for="" class="text-center">Trending articles</label>
+          </div>
+          <div class="mt-1 w3-hide-small" id="sidenav-content-wrapper">
+            {% for trending in trending.items%}
+            <p class="ml-1" id="sidenav-info"><a
+                href="  {{ url_for('blog.article',post_id = trending.id,uname = trending.author.uname,slug = trending.slug ) }} ">{{ trending.title}}
+              </a> </p>
+            {% endfor%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%}

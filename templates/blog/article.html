@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title%} {{ title }} {% endblock %}
+
+{% block content%}
+<div class="container-fluid" id="article-wrapper">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-9">
+      <div class="icon-bar w3-hide-small">
+        <a href="#" data-sharer="facebook" data-hashtag="hashtag"
+          data-url="http://127.0.0.1:5000/{{url_for('blog.article',post_id=post.id,uname=post.author.uname,slug=post.slug) }}"
+          class="facebook"><i class="fa fa-facebook"></i></a>
+        <a href="#" data-sharer="twitter" data-title="{{ post.title|safe }}" &nbsp;&nbsp;&nbsp;
+          data-hashtags="Trendingarticles,Info-Ryan"
+          data-url="http://127.0.0.1:5000/{{url_for('blog.article',post_id=post.id,uname=post.author.uname,slug=post.slug) }}"
+          class="twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" data-sharer="linkedin"
+          data-url="http://127.0.0.1:5000/{{url_for('blog.article',post_id=post.id,uname=post.author.uname,slug=post.slug) }}"
+          class="linkedin"><i class="fa fa-linkedin"></i></a>
+        <a href="" data-sharer="whatsapp" data-title="{{ post.title|safe }}"
+          data-url="http://127.0.0.1:5000/{{url_for('blog.article',post_id=post.id,uname=post.author.uname,slug=post.slug) }}"
+          class="whatsapp"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+      </div>
+      <div id="article-content">
+        <div>
+          <div id="post-header">
+            <p class="site-map w3-hide-small"> <a href="{{ url_for('index') }}">Home</a>/<a
+                href="{{ url_for('blog.blog') }}">Blog</a>/<a href="">{{ post.category|safe }}</a>/<a
+                href=" {{ url_for('blog.article',post_id = post.id ,uname = post.author.uname,slug = post.slug) }}">{{ post.title|safe }}</a></a>
+            </p>
+            <hr class="w3-clear w3-hide-small">
+            <h1 id="post-description-head"> {{ post.title|safe }} </h1>
+            <div class="author-wrapper">
+              <div class="d-flex">
+                <img src="/static/images/ProfileImages/{{ post.author.image }}" alt="author"
+                  class="author-image-article w3-hide-small">
+                <p id="post-description-info" class="p-2"><i class="fa fa-user mr-1" aria-hidden="true"></i>
+                  <a href=" {{ url_for('blog.profile',uname = post.author.uname ) }}">{{ post.author.fname }}</a>&nbsp;
+                  <i class="fa fa-clock-o mr-1"
+                    aria-hidden="true"></i>{{ post.date_posted.strftime('%B %d,%Y') }}&nbsp;&nbsp;<i
+                    class="fa fa-eye mr-1" aria-hidden="true" style="color:#2ECC71;"></i>{{ post.views}}
+                  &nbsp;&nbsp;
+                  <i class="fa fa-comments mr-2" aria-hidden="true"></i> {{ post.count}}&nbsp;
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="article-image-div">
+            <img alt="post image" id="blog-article-image" src="/static/images/blog-posts/{{ post.postImage }}">
+          </div>
+          <p class="post-content"> {{ post.body|safe }} </p>
+          <div class="w3-container">
+            <hr class="w3-clear">
+            <div class="author">
+              <img src="/static/images/ProfileImages/{{ post.author.image }}" alt="Author" class="about-author-image">
+              <p class="author-head">About The Author</p>
+              <p class="author-about-text">{{ post.author.about }}</p>
+            </div>
+            <br>
+            <p class="comments-head" data-toggle="collapse" data-target="#all" id="collapse-comments"><span
+                class="badge badge-primary badge-pill">{{ post.count}}</span> Comment(s)&nbsp;&nbsp;<span
+                class="my-button collapse-nav-button"></span></p>
+
+            {% for comment in comments %}
+            <div id="all" class="collapse row">
+              <div class="col-sm-2">
+                <img src="/static/images/ProfileImages/{{ comment.rimage }}" alt="Image" class="author-image mr-auto">
+              </div>
+
+              <div class="comments-message col-sm-8">
+                <a href="{{ url_for('blog.profile',uname = comment.respondent ) }}">{{ comment.respondent}}</a>
+                <p class="comment-p">{{comment.message|safe}}</p>
+                <p class="comment-posted-date">{{ comment.date_posted.strftime('%B  %d  ,  %Y ') }}</p>
+
+                <div class="majorpoints">
+                  <img src="/static/images/icons/reply.svg" alt="Reply" class="comment-reply-icon"
+                    onclick="showForm()">Reply
+                  <div class="hiders" style="display:none">
+
+                    <form method="POST" action=" {{ request.path }} " id="comment-reply-form">
+                      {{ form.csrf_token }}
+
+                      {{ form2.reply(class_="w3-input w3-border w3-hover-border-blue newsletter-email" ,onfocus="this.value=''",placeholder="Reply...")}}
+                      <br>
+                      <button type="submit" class="btn btn-primary" id="reply-comment-button">Reply</button>
+                    </form>
+                  </div>
+                </div>
+                <hr class="clear">
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- newsletter popup -->
+
+          <div class="newsletter row w3-hide-small">
+            <div class="box col-md-12">
+              <div>
+                <img src="/static/images/icons/undraw_Mail_sent_re_0ofv.svg" alt="Join-the-mailing-list"
+                  class="newsletter-svg">
+              </div>
+              <div class="close"><span>&times</span></div>
+              <div class="form">
+                <h1>Join the List !</h1>
+                <p class="newsletter-text">Become part of our mailing list to get the latest trending articles and
+                  news.
+                  <br>
+                  Just for you !</p>
+                <form method="POST" action="/blog/subscribe/">
+                  {{ form.csrf_token }}
+
+                  {{ form.email(class_="w3-input w3-border w3-hover-border-blue newsletter-email",onfocus="this.value=''",placeholder="Enter your email address")}}
+                  <br>
+                  <button type="submit" class="btn btn-primary newsletter-cta">Okay,Join</button>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- newsletter popup -->
+
+          <div class="comments-section">
+            <p class="comments-head">Leave a Comment/Question </p>
+
+            {% if current_user.is_authenticated %}
+            <form method="POST" action=" {{ request.path }} " id="add-comment">
+              {{ form.csrf_token }}
+
+              {{ form.comment(class_="w3-input w3-border w3-hover-border-blue w3-round-small ",placeholder="Comment here ...")}}
+              <button class="btn w3-left btn-outline-primary rounded-pill mt-4" id="comment-post" type="submit">Post
+                comment</button>
+            </form>
+            {% else %}
+
+            <button class="btn w3-left btn-outline-primary rounded-pill " id="login-comment-post"><a class=""
+                href="{{ url_for('auth.login') }}">Log in to comment</a></button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 w3-hide-small">
+
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock%}

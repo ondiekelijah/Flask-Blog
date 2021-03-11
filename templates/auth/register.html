@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title%}Infokit | Signup{% endblock %}
+{% block content%}
+
+<body id="regform">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6 mt-4 mb-4" id="regdiv">
+
+        <form method="POST" action="{{ request.path }}" class=" w3-container w3-round" id="rform">
+          <div class="alerts mt-1 ml-1">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+              <!-- <strong>Title</strong> --> {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+          </div>
+          {{ form.csrf_token }}
+          <h4 class="text-center" id="h1">Create Account</h4>
+          <div class="form-group">
+
+            <div class="w3-half w3-container">
+              <div class="form-group mt-4"
+                style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                <img src="/static/images/icons/undraw_Add_user_re_5oib.svg" class="w3-hide-small" id="usr">
+
+              </div>
+              <div class="form-group mt-4"
+                style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+
+                {{ form.fname(class_="w3-input w3-hover-border-teal" ,placeholder="First name")}}
+              </div>
+              {% for error in form.fname.errors %}
+              <div class="alert alert-danger mt-2">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ error }}
+              </div>
+
+              {% endfor%}
+              <div class="form-group mt-4"
+                style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                {{ form.lname(class_="w3-input w3-hover-border-teal" ,placeholder="Last name")}}
+              </div>
+              {% for error in form.lname.errors %}
+              <div class="alert alert-danger mt-2">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ error }}
+              </div>
+
+              {% endfor%}
+
+
+            </div>
+            <!-- end of left -->
+            <div class="w3-half w3-container">
+              <div class="form-group  mt-4"
+                style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                {{ form.uname(class_="w3-input w3-hover-border-teal ",placeholder="Username")}}
+              </div>
+              {% for error in form.uname.errors %}
+              <div class="alert alert-danger mt-2">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ error }}
+              </div>
+
+              {% endfor%}
+
+              <div class="form-group mt-4"
+                style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                {{ form.email(class_="w3-input w3-hover-border-teal",placeholder="Email")}}
+              </div>
+              {% for error in form.email.errors %}
+              <div class="alert alert-danger mt-2">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ error }}
+              </div>
+
+              {% endfor%}
+
+              <div class="form-group mt-4"
+                style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                {{ form.pwd(class_="w3-input w3-hover-border-teal ",placeholder="Password")}}
+              </div>
+              {% for error in form.pwd.errors %}
+              <div class="alert alert-danger mt-2">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ error }}
+              </div>
+
+              {% endfor%}
+
+              <div class="form-group mt-4"
+                style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                {{ form.cpwd(class_="w3-input w3-hover-border-teal " ,placeholder="Confirm Password")}}
+              </div>
+              {% for error in form.cpwd.errors %}
+              <div class="alert alert-danger mt-2">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ error }}
+              </div>
+
+              {% endfor%}
+
+            </div>
+
+            <div class="w3-center">
+              <button type="submit" class="btn btn-outline-success rounded-pill mt-4" id="regbutt"> Create account <i
+                  class='fas fa-user-plus ml-2'></i></button>
+            </div>
+          </div>
+          <p id="alt" class="text-center py-3">
+            Already have an account ?
+            <a href="{{ url_for('auth.login') }}">Login</a>
+          </p>
+        </form>
+        <script>
+          $("#dob").datetimepicker({
+            'autoclose': true,
+            'format': 'yy-m-d'
+
+          });
+
+        </script>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+{% endblock%}

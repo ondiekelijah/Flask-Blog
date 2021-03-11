@@ -1,0 +1,13 @@
+.page-not-found{
+    height: 40vh;
+    margin-top: 6rem;
+}
+.errors{
+    font-family: 'Playfair Display', serif;
+}
+@media screen and (max-width: 992px){
+    .page-not-found{
+        height: 20vh;
+        width: 80%;
+    } 
+}

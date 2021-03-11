@@ -1,0 +1,213 @@
+#account-wrapper{
+    margin-top: 0.5rem;
+}
+.alerts{
+    font-family: 'Raleway', sans-serif;
+}
+.account-head{
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+}
+#account-left-div{
+    margin: 0;
+    padding-bottom: 3rem;
+    padding-top: 1rem;
+    border-bottom: 1px solid #2ECC71;
+}
+#account-right-div{
+    margin-left:0px;
+    margin-right:0px;
+    padding:3px;
+}
+#account-input{
+    margin-bottom:0.5rem;
+}
+#user-profile-wrapper{
+    background-color: white;
+    margin-top:4rem;
+}
+.profile-info-wrapper{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#user-profile-image{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin-top: 2rem;
+    margin-right: 1rem;
+    object-fit: cover; 
+}
+.author-about{
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 20px;
+}
+.uname{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#update-account-form{
+    font-family: 'Raleway', sans-serif;
+}
+#update-profile-button{
+    width: 50%;
+    margin-top: 10px;
+}
+.update-article-button,.delete-article-button{
+    border-radius: 0%;
+    font-family: 'Raleway', sans-serif;
+}
+.update-article-button a:hover{
+    color: #ffff;
+    text-decoration: none;
+}
+.modal-header,.modal-footer{
+    border: none;
+}
+#DeleteModalLongTitle{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+.modal-footer button a:hover{
+    text-decoration: none;
+    color: #ffffff;
+}
+.modal-footer button{
+    border-radius: 0%;
+    font-family: 'Raleway', sans-serif;  
+}
+#page-active{
+    background-color:#448AFF;
+    color:white;
+
+}
+
+#page-inactive:hover{
+    background-color:#2ECC71;
+}
+.account-head{
+    font-size: 1.5rem;
+    font-family: 'Raleway', sans-serif;
+}
+.account-posts{
+    padding: 0;
+    margin-bottom: 0;
+}
+.post-info{
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    opacity: .8;
+}
+.w3-third.w3-container{
+    margin-bottom: 3rem;
+}
+/*=========================
+  Icons
+ ================= */
+
+/* footer social icons */
+ul.social-network {
+	list-style: none;
+	display: inline;
+	margin-left:0 !important;
+	padding: 0;
+}
+ul.social-network li {
+	display: inline;
+	margin: 0 5px;
+}
+
+
+/* footer social icons */
+.social-network a.icoRss:hover {
+	background-color: #F56505;
+}
+.social-network a.icoFacebook:hover {
+	background-color:#3B5998;
+}
+.social-network a.icoTwitter:hover {
+	background-color:#33ccff;
+}
+.social-network a.icoGoogle:hover {
+	background-color:#BD3518;
+}
+.social-network a.icoVimeo:hover {
+	background-color:#0590B8;
+}
+.social-network a.icoLinkedin:hover {
+	background-color:#007bb7;
+}
+.social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
+.social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
+	color:#fff;
+}
+a.socialIcon:hover, .socialHoverClass {
+	color:#44BCDD;
+}
+
+.social-circle li a {
+	display:inline-block;
+	position:relative;
+	margin:0 auto 0 auto;
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	text-align:center;
+	width: 50px;
+	height: 50px;
+	font-size:20px;
+}
+.social-circle li i {
+	margin:0;
+	line-height:50px;
+	text-align: center;
+}
+
+.social-circle li a:hover i, .triggeredHover {
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-ms--transform: rotate(360deg);
+	transform: rotate(360deg);
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	transition: all 0.2s;
+}
+.social-circle i {
+	color: white;
+	-webkit-transition: all 0.8s;
+	-moz-transition: all 0.8s;
+	-o-transition: all 0.8s;
+	-ms-transition: all 0.8s;
+	transition: all 0.8s;
+}
+
+.social-network.social-circle a {
+ background-color: #2ECC71;   
+}
+@media screen and (max-width: 599px){
+    #account-left-div{
+       margin: 0;
+       
+    }
+    #account-right-div{
+        margin: 0;
+
+    }
+    #update-account-form{
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:992px){
+    #account-left-div{
+       margin: 0;
+    }
+    #account-right-div{
+        margin-top: 5px;
+
+    }
+    #update-account-form{
+        margin: 0;
+    }
+}

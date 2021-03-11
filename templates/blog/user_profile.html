@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title%} {{ title }} {% endblock %}
+
+{% block content%}
+<div class="container-fluid" id="user-profile-wrapper">
+    <div class="row" id="account-wrapper-div">
+        <!-- left column -->
+        <div class="col-md-12">
+            <div class="form-group" id="account-left-div">
+                <div class="container">
+                    <div class="alerts">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <!-- <strong>Title</strong> --> {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="row o">
+                        <div class="col-md-12 text-center">
+                            <img src="{{ image }} " alt="profile-image" id="user-profile-image"
+                                class="w3-hover-opacity w3-border">
+                            <h2 class="account-head">{{ user.fname}}&nbsp;&nbsp;{{ user.lname}}</h2>
+                            <p class="author-about"> {{ user.about}} </p>
+                            <div class="col-md-12">
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i
+                                                class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i
+                                                class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i
+                                                class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- right column -->
+
+        <div class="col-md-12">
+            <div class="form-group" id="account-right-div">
+                <div class="container">
+                    <p class="account-head"> Posts by {{ user.uname}}</p>
+                    <div class="w3-row">
+                        {% for post in posts.items %}
+                        <div class="w3-third w3-container">
+                            <img alt="post image" id="blog-post-image" class="w3-hover-opacity" loading="lazy"
+                                src="/static/images/blog-posts/{{ post.postImage }}">
+                            <div id="post-header">
+                                <h4 id="post-description-blog"> <a
+                                        href="  {{ url_for('blog.article',post_id = post.id ,uname = post.author.uname,slug = post.slug) }} ">
+                                        {{ post.title|safe }}
+                                    </a> </h4>
+                                <p class="post-info ml-1"> <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    {{ post.date_posted.strftime('%B %d,%Y') }}&nbsp;.&nbsp;{{ post.views}}&nbsp;views&nbsp;
+                                    <i class="fa fa-comments mr-2" aria-hidden="true"></i>
+                                    {{ post.count}}&nbsp;comment(s)</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endblock%}

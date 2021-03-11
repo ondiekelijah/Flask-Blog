@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title%} {{ title }} {% endblock %}
+
+{% block content%}
+<div class="blog-wrapper">
+    <div class="container-fluid-blog">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-9">
+                <div class="alerts mt-2">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <!-- <strong>Title</strong> --> {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+                <h1 class="latest-articles">
+                    <span> {{ label }} </span>
+                </h1>
+                <div class="w3-row content">
+                    {% for post in posts %}
+                    <div id="content" class="w3-container text-center">
+                        <div id="post-header">
+                            <h4 id="post-description-blog"> <a
+                                    href="  {{ url_for('blog.article',post_id = post.id ,uname = post.author.uname,slug = post.slug) }} ">
+                                    {{ post.title|safe }}
+                                </a> </h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- left column -->
+
+            <!-- right column -->
+
+            <div class="col-md-3 w3-hide-small" id="rightColumn">
+                <div>
+                    <form action=" {{ request.path }} " method="POST">
+                        <input type="text" name="sval" id="sval" class="w3-input w3-border" onfocus="this.value=''" placeholder="Type search here">
+                        <button class="search-button w3-btn w3-blue w3-border" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

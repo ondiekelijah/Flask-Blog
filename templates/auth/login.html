@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title%}Infokit | Signin{% endblock %}
+
+{% block content%}
+
+<body id="loginform">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4 mt-4" id="ldiv">
+        <form method="POST" action=" {{ request.path }} " class="w3-container w3-round py-1" id="lform">
+
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+          {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+            <!-- <strong>Title</strong> --> {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+          <div class="">
+
+            <img src="/static/images/icons/undraw_secure_login_pdn4.svg" alt="login" id="usr"
+              class="mx-auto text-center">
+            <h4 class=" text-center ml-1" id="h4">Sign in</h4>
+
+          </div>
+          {{ form.csrf_token }}
+          <div class="form-group">
+
+            <div class="form-group mt-4"
+              style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            {{ form.email(class_="w3-input w3-round-small w3-hover-border-teal",placeholder="Email")}}
+
+            </div>
+            {% for error in form.email.errors %}
+            <div class="alert alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ error }}
+            </div>
+
+            {% endfor%}
+
+            <div class="form-group mt-4"
+              style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+             {{ form.pwd(class_="w3-input w3-round-small w3-hover-border-teal",placeholder="Password")}}
+            </div>
+            {% for error in form.pwd.errors %}
+            <div class="alert alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ error }}
+            </div>
+
+            {% endfor%}
+            <div class="form-group mt-4"
+              style="display:flex; flex-direction: row; justify-content: left; align-items: left">
+              <p id="remme"><input type="checkbox" name="remember_me" class="mr-3 ml-1">Keep me logged in</p>
+            </div>
+
+            <div class="w3-center">
+              <button type="submit" class="btn btn-outline-success rounded-pill mt-4 py-2 btn-block" id="lbutt">Login<i
+                  class="fa fa-unlock-alt ml-3" aria-hidden="true"></i></button>
+            </div>
+            <p class="text-center py-3" id="alt">
+              New user?<a href="{{ url_for('auth.register') }}"> Create account</a>
+
+            </p>
+        </form>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock%}

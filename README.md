@@ -1,2 +1,1 @@
-# Info-Ryan-Blog
 # Teksade

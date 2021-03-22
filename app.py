@@ -58,10 +58,11 @@ def create_app():
             return access
         
     admin = Admin(app,name='Infokit Admin', template_mode='bootstrap3')
-    from .models import User,Post,Comments,Role
+    from .models import User,Post,Comments,Role,Replies
     admin.add_view(MyModelView(User, db.session))
     admin.add_view(MyModelView(Post, db.session))
     admin.add_view(MyModelView(Comments, db.session))
+    admin.add_view(MyModelView(Replies, db.session))
     admin.add_view(MyModelView(Role, db.session))
 
 

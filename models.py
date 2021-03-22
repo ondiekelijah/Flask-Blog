@@ -130,10 +130,7 @@ class Replies(db.Model):
     message = db.Column(db.String(2000), nullable=False)
     date_posted = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author = db.Column(db.String(100), nullable=False)
-    comment_id = db.Column(
-        db.Integer, db.ForeignKey("comments.id", ondelete="SET NULL"), nullable=True
-    )
-    comment = db.relationship("Comments", backref=db.backref("comment"), lazy=True)
+    comment_id = db.Column(db.Integer,nullable=False)
     def __repr__(self):
         return "<Replies %r>" % self.message
 

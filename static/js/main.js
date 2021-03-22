@@ -92,6 +92,7 @@ window.addEventListener("load", () => {
         text: "Please re-enter your email!",
         icon: "warning",
         button: true,
+        popup: 'format-pre'
       });
     }
 
@@ -140,4 +141,5 @@ close.addEventListener("click", () => {
 $('.majorpoints').click(function(){
   $(this).find('.hiders').show();
 });
+
 

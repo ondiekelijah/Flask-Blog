@@ -29,7 +29,9 @@ class AddPost(FlaskForm):
 
 class CommentPost(FlaskForm):
     comment = TextAreaField(validators=[InputRequired()])
-    email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
+    #Below are to allow for form submission,validation is therefore skipped
+    email = StringField(validators=[Email(), Length(1, 64)])
+    reply = TextAreaField(validators=[InputRequired()])
 
 class ReplyComment(FlaskForm):
     reply = TextAreaField(validators=[InputRequired()])

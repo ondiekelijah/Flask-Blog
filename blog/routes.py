@@ -65,36 +65,47 @@ def blog():
         .paginate(page=page, per_page=6)
     )
     return render_template(
-        "blog/blog.html", posts=posts, trending=trending, title="Dev Elie | Home"
+        "blog/blog.html", posts=posts, trending=trending, title="Teksade | Home"
     )
 
 
 @bp.route("/search/", strict_slashes=False, methods=("GET", "POST"))
 def search():
-    keyword = request.args.get("sval", "")
-    posts = Post.query
+    keyword = request.args.get("sval")
+    keyword = keyword.text.strip()
+    print(keyword)
+    if request.method == 'POST':
+        # posts = Post.query.filter(Post.title.like(keyword)).all()
+        # print(posts)
 
     # posts = Post.query.all()
     # posts = Post.query.msearch(
     #     keyword, fields=["title", "slug", "body"], limit=20
     # ).all()
-    # posts = Post.query.filter(Post.title.contains(keyword))
-    # posts = Post.query
-    # posts = posts.filter_by(Post.title.like('%' + keyword + '%'))
-    # posts = posts.order_by(Post.title).all()
+        # posts = Post.query.filter(Post.title.like(keyword)).all()
     # if request.method == 'POST':
     #     search = request.args.get('sval','')
     # search = search.strip()
-    # posts = Post.query.filter(or_(Post.title.like(keyword), Post.slug.ilike(keyword))).all()
-
-    posts = posts.filter(Post.title.like('%' + keyword + '%'))
-
-    posts = posts.order_by(Post.id).all()
-    return render_template(
+        posts = Post.query.filter(Post.title.like('Blogging')).all()
+    # posts = Post.query.filter(Post.title.contains(keyword) |
+    #         Post.body.contains(keyword))
+    # posts = posts.order_by(Post.id).all()
+        # search by author or book
+        # keyword = keyword.strip() 
+        # posts = Post.query.filter(or_(Post.title.ilike(f'%{keyword}%'), Post.body.ilike(f'%{keyword}%'))).all()
+        # posts = Post.query.all()
+        # posts = Post.query.filter(Post.title.like(keyword)).all()
+        print(posts)
+        return render_template(
         "blog/search_results.html",
         label="Search Results",
         posts=posts,
-        title="Dev Elie | Home",
+        title="Teksade | Home",
+    )
+    return render_template(
+        "blog/search_results.html",
+        label="Search Results",
+        title="Teksade | Home",
     )
 
 
@@ -121,7 +132,7 @@ def tech():
         posts=posts,
         trending=trending,
         form=form,
-        title="Dev Elie | Home",
+        title="Teksade | Home",
     )
 
 
@@ -142,7 +153,7 @@ def bs():
         posts=posts,
         trending=trending,
         form=form,
-        title="Dev Elie | Home",
+        title="Teksade | Home",
     )
 
 
@@ -152,26 +163,21 @@ def bs():
     strict_slashes=False,
 )
 def article(post_id, uname, slug):
-    comment_form = CommentPost()
-    replies_form = ReplyComment()
+    form = CommentPost()
     post = Post.query.filter_by(id=post_id).first()
     comments = Comments.query.filter_by(post_id=post.id).all()
+    replies = Replies.query.filter_by(id=Replies.id).all()
+
     post.views += 1
     db.session.commit()
 
-    # Comment replies
-    # comment_id.get_commentID()
-
-    # comment = Comments.query.filter_by(id=comment_id).first()
-    # replies = Replies.query.filter_by(comment_id=comment_id).all()
 
     url = "http://127.0.0.1:5000/"
 
     read_time = estimate_reading_time(url)
 
-    if request.method == "POST" and comment_form.validate_on_submit():
-        message = comment_form.comment.data
-        print(message)
+    if request.method == "POST": #and form.validate_on_submit():
+        message = form.comment.data
         comment = Comments(
             message=message,
             post_id=post.id,
@@ -182,29 +188,16 @@ def article(post_id, uname, slug):
         post.count += 1
         flash("Comment posted", "success")
         db.session.commit()
-    elif request.method == "POST" and replies_form.validate_on_submit():
-        message = replies_form.reply.data
-        if not current_user.is_authenticated:
-            uname = "Anonymous"
-        else:
-            uname = current_user.uname
 
-            reply = Replies(
-                message=message,
-                author=uname,
-            )
-            db.session.add(reply)
-            db.session.commit()
-            print("Replied")
 
     return render_template(
         "blog/article.html",
         post=post,
         read_time=read_time,
-        form=comment_form,
-        form2=replies_form,
+        form=form,
         comments=comments,
-        title="Dev Elie | Blog",
+        replies=replies,
+        title="Teksade | Blog",
     )
 
 
@@ -259,7 +252,7 @@ def new_post():
         "blog/add.html",
         form=form,
         posts=posts,
-        title="Dev Elie | Blog",
+        title="Teksade | Blog",
         legend="Create a new blog article",
     )
 
@@ -312,10 +305,9 @@ def update_article(post_id, slug):
         "blog/add.html",
         form=form,
         post=post,
-        title="Dev Elie|Blog-update post",
+        title="Teksade|Blog-update post",
         legend="Update Post",
     )
-
 
 @bp.route(
     "/<int:post_id>/<string:slug>/delete",
@@ -352,7 +344,7 @@ def profile(uname):
         image=image,
         posts=posts,
         user=user,
-        title="Dev Elie | Profile",
+        title="Teksade | Profile",
     )
 
 
@@ -388,7 +380,31 @@ def subscribe():
                 db.session.rollback()
                 flash(f"An error occured !", "danger")
     return ("", 204)
+    return render_template(
+        "blog/article.html",
+        form=form,
+        title="Teksade | Blog",
+    )
+# Comments reply route handler
+@bp.route("/<int:comment_id>/replyComment/", methods=("GET", "POST"), strict_slashes=False)
+def replyHandler(comment_id):
+    form = ReplyComment()
+    comment = Comments.query.filter_by(id=comment_id).first()
+    replies = Replies.query.filter_by(comment_id=comment.id).all()
 
+    if request.method == "POST":
+        message = form.reply.data
+        author = current_user.fname
+        message = Replies(
+            message = message,
+            author = author,
+            comment_id = comment_id
+        )
+        db.session.add(message)
+        db.session.commit()
+        flash("Reply succesfully posted", "success")
+
+    return ("",204)
 
 # Handles javascript image uploads from tinyMCE
 @bp.route("/imageuploader", methods=["POST"])

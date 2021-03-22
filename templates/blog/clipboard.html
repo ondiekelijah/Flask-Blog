@@ -1,0 +1,39 @@
+<div class="majorpoints">
+  <img src="/static/images/icons/reply.svg" alt="Reply" class="comment-reply-icon" onclick="showForm()">Reply
+  <div class="hiders" style="display:none">
+
+    <form method="POST" action=" {{ request.path }} " id="comment-reply-form">
+      {{ form.csrf_token }}
+
+      {{ form.reply(class_="w3-input w3-border w3-hover-border-blue newsletter-email" ,onfocus="this.value=''",placeholder="Reply...")}}
+      <br>
+      <button type="submit" class="btn btn-primary" id="reply-comment-button">Reply</button>
+    </form>
+  </div>
+</div>
+
+
+
+<div class="newsletter row w3-hide-small">
+  <div class="box col-md-12">
+    <div>
+      <img src="/static/images/icons/undraw_Mail_sent_re_0ofv.svg" alt="Join-the-mailing-list" class="newsletter-svg">
+    </div>
+    <div class="close"><span>&times</span></div>
+    <div class="form">
+      <h1>Join the List !</h1>
+      <p class="newsletter-text">Become part of our mailing list to get the latest trending articles and
+        news.
+        <br>
+        Just for you !</p>
+      <form method="POST" action="/blog/subscribe/">
+        {{ form.csrf_token }}
+
+        {{ form.email(class_="w3-input w3-border w3-hover-border-blue newsletter-email",onfocus="this.value=''",placeholder="Enter your email address")}}
+        <br>
+        <button type="submit" class="btn btn-primary newsletter-cta">Okay,Join</button>
+
+      </form>
+    </div>
+  </div>
+</div>

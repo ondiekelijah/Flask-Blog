@@ -223,7 +223,6 @@ figure.image figcaption {
     margin-bottom: 0;
     margin-left: 0;
     font-family: 'Raleway', sans-serif;
-
 }
 .comment-posted-date{
     opacity: .6;
@@ -236,9 +235,23 @@ figure.image figcaption {
     cursor: pointer;
     margin-bottom: 1rem;
 }
-
+/* Comment replies section */
 .comment-replies-section button{
     margin-right: auto;
+}
+.comment-replies{
+    background-color: #ffffff;
+    border-left: 1px solid #2ECC71;
+    padding-left: 1rem;
+}
+.comment-replies-title{
+    color: #448AFF;
+}
+.reply-content{
+    padding-bottom: 10px;
+}
+.reply-content span{
+    color: #448AFF;
 }
 /* comment textarea */
 #comment:invalid {
@@ -259,6 +272,7 @@ figure.image figcaption {
     font-family: 'Raleway', sans-serif;
     font-family: 'Quicksand', sans-serif;
 }
+
 .site-map{
     margin-top: 1rem;
 }
@@ -317,7 +331,8 @@ figure.image figcaption {
     border-radius: 50%;
     float: left;
 }
-
+#all{
+}
 #collapse-comments:hover{
     cursor: pointer;
 }

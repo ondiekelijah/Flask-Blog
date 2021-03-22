@@ -28,7 +28,7 @@
                     {% for post in posts %}
                     <div id="content" class="w3-container text-center">
                         <div id="post-header">
-                            <h4 id="post-description-blog"> <a
+                            <h4 id="search "> <a
                                     href="  {{ url_for('blog.article',post_id = post.id ,uname = post.author.uname,slug = post.slug) }} ">
                                     {{ post.title|safe }}
                                 </a> </h4>

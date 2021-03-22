@@ -53,7 +53,7 @@
 
 <body>
     <div class="d-flex bd-highlight w3-hide-small">
-        <div class="mr-auto bd-highlight">Call us +254 713 933366</div>
+        <div class="mr-auto bd-highlight">Call us +254 768 144877</div>
 
         <div class="bd-highlight">
             Donate / Support
@@ -61,7 +61,7 @@
     </div>
     <nav class="navbar navbar-expand-md sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Devsate</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Teksade</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars" aria-hidden="true"></i>
@@ -191,6 +191,17 @@
         </p>
 
     </div>
+    <script>
+        function loginButton() {
+            btn = document.getElementById('lbutt');
+            btn.innerHTML = '<i class = "fa fa-spinner fa-spin"></i> Verifying';
+            setTimeout(function () {
+                btn.innerHTML = 'Login';
+            }, 3000);
+
+        }
+
+    </script>
     <script src="{{url_for('static',filename='js/main.js')}}"></script>
     <script src="{{url_for('static',filename='js/sweetalert.min.js')}}"></script>
 

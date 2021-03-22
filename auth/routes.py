@@ -168,7 +168,7 @@ def account():
         posts=posts,
         post_count=post_count,
         user=user,
-        title="Info Ryan-Account",
+        title="Teksade-Account",
     )
 
 

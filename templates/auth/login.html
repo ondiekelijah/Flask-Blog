@@ -63,8 +63,7 @@
             </div>
 
             <div class="w3-center">
-              <button type="submit" class="btn btn-outline-success rounded-pill mt-4 py-2 btn-block" id="lbutt">Login<i
-                  class="fa fa-unlock-alt ml-3" aria-hidden="true"></i></button>
+              <button type="submit" class="btn btn-outline-success rounded-pill mt-4 py-2 btn-block" onclick="loginButton()" id="lbutt">Login</button>
             </div>
             <p class="text-center py-3" id="alt">
               New user?<a href="{{ url_for('auth.register') }}"> Create account</a>

@@ -72,20 +72,33 @@
                 <p class="comment-p">{{comment.message|safe}}</p>
                 <p class="comment-posted-date">{{ comment.date_posted.strftime('%B  %d  ,  %Y ') }}</p>
 
+
+                <div class="comment-replies">
+                  <p class="comment-replies-title">Replies</p>
+                  {%for reply in replies%}
+                  {% if reply.comment_id == comment.id  %}
+                  <div class="reply-content">
+                    <span> {{ reply.author }} </span> <p>  {{ reply.message }} </p>
+                  </div>
+                  {%endif%}
+                  {%endfor%}
+                </div>
+
                 <div class="majorpoints">
-                  <img src="/static/images/icons/reply.svg" alt="Reply" class="comment-reply-icon"
-                    onclick="showForm()">Reply
+                  <img src="/static/images/icons/reply.svg" alt="Reply" class="comment-reply-icon" onclick="showForm()">Reply
                   <div class="hiders" style="display:none">
-
-                    <form method="POST" action=" {{ request.path }} " id="comment-reply-form">
+                
+                    <form method="POST" action="{{ url_for('blog.replyHandler',comment_id = comment.id) }}" id="comment-reply-form">
                       {{ form.csrf_token }}
-
-                      {{ form2.reply(class_="w3-input w3-border w3-hover-border-blue newsletter-email" ,onfocus="this.value=''",placeholder="Reply...")}}
+                
+                      {{ form.reply(class_="w3-input w3-border w3-hover-border-blue newsletter-email" ,onfocus="this.value=''",placeholder="Reply...")}}
                       <br>
                       <button type="submit" class="btn btn-primary" id="reply-comment-button">Reply</button>
+                      
                     </form>
                   </div>
                 </div>
+
                 <hr class="clear">
               </div>
             </div>
@@ -128,7 +141,7 @@
             <form method="POST" action=" {{ request.path }} " id="add-comment">
               {{ form.csrf_token }}
 
-              {{ form.comment(class_="w3-input w3-border w3-hover-border-blue w3-round-small ",placeholder="Comment here ...")}}
+              {{ form.comment(class_="w3-input w3-border w3-hover-border-blue w3-round-small",onfocus="this.value=''",placeholder="Comment here ...")}}
               <button class="btn w3-left btn-outline-primary rounded-pill mt-4" id="comment-post" type="submit">Post
                 comment</button>
             </form>

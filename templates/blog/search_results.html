@@ -12,10 +12,12 @@
                     <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
                     {% if messages %}
                     {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <!-- <strong>Title</strong> --> {{ message }}
+                    <div class="alert alert-{{ category }} alert-dismissible d-flex justify-content-center align-items-center"
+                        role="alert">
+                        <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button> -->
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                        {{ message }}
                     </div>
                     {% endfor %}
                     {% endif %}
@@ -44,7 +46,8 @@
             <div class="col-md-3 w3-hide-small" id="rightColumn">
                 <div>
                     <form action=" {{ request.path }} " method="POST">
-                        <input type="text" name="sval" id="sval" class="w3-input w3-border" onfocus="this.value=''" placeholder="Type search here">
+                        <input type="text" name="sval" id="sval" class="w3-input w3-border" onfocus="this.value=''"
+                            placeholder="Type search here">
                         <button class="search-button w3-btn w3-blue w3-border" type="submit">Search</button>
                     </form>
                 </div>

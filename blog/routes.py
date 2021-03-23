@@ -71,31 +71,14 @@ def blog():
 
 @bp.route("/search/", strict_slashes=False, methods=("GET", "POST"))
 def search():
-    keyword = request.args.get("sval")
-    keyword = keyword.text.strip()
-    print(keyword)
-    if request.method == 'POST':
-        # posts = Post.query.filter(Post.title.like(keyword)).all()
-        # print(posts)
+    # keyword = request.args.get("sval")
+    keyword = request.form.get('sval')
 
-    # posts = Post.query.all()
-    # posts = Post.query.msearch(
-    #     keyword, fields=["title", "slug", "body"], limit=20
-    # ).all()
-        # posts = Post.query.filter(Post.title.like(keyword)).all()
-    # if request.method == 'POST':
-    #     search = request.args.get('sval','')
-    # search = search.strip()
-        posts = Post.query.filter(Post.title.like('Blogging')).all()
-    # posts = Post.query.filter(Post.title.contains(keyword) |
-    #         Post.body.contains(keyword))
-    # posts = posts.order_by(Post.id).all()
-        # search by author or book
-        # keyword = keyword.strip() 
-        # posts = Post.query.filter(or_(Post.title.ilike(f'%{keyword}%'), Post.body.ilike(f'%{keyword}%'))).all()
-        # posts = Post.query.all()
-        # posts = Post.query.filter(Post.title.like(keyword)).all()
-        print(posts)
+    if request.method == 'POST':
+        posts = Post.query.filter(or_(Post.title.ilike(f'%{keyword}%'), Post.body.ilike(f'%{keyword}%'))).all()
+        if not posts:
+                flash("No results matched your search", "info")
+
         return render_template(
         "blog/search_results.html",
         label="Search Results",

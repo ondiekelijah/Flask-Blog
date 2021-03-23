@@ -6,9 +6,7 @@ body{
     background: rgb(252, 252, 252);
 }
 /* Alert divs styling */
-.alert button{
-  line-height: normal;
-}
+
 /* top header styling */
 .d-flex.bd-highlight{
   padding: 0.5rem;

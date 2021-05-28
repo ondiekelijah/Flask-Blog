@@ -105,6 +105,7 @@ def create_app():
 #     return app
 
 # Inserting User roles
+# Use these lines to avaoid "out of context" errors
 # from app import create_app
 # app = create_app()
 # app.app_context().push()

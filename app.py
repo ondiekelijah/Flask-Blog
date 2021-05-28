@@ -1,3 +1,4 @@
+#Comment lines 1-75 when inserting user roles and when creating a database using mirate
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy

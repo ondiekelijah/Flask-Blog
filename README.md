@@ -20,7 +20,7 @@ A fully functional blog website with CRUD capabilities. Developed using Python F
 * Delete, moderate and Edit comments
 
 **NB:** Commands issued are for a linux environment,however no one is limited.
-# Issues
+# Fallbacks
 > When executing the migrate commands to create a new database and when insering user roles,often a **Circular import error is raised**.
 > To fix or avoid this,check on the app.py file and do the following
   * Do an inverse operation like this,comment line **1-75**

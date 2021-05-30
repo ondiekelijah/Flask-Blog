@@ -85,21 +85,30 @@ def register():
             flash(f"An error occured !", "danger")
     return render_template("auth/register.html", form=form)
 
-
+# lOGIN route
 @auth.route("/login/", methods=("GET", "POST"), strict_slashes=False)
 def login():
+    default = 'http://127.0.0.1:5000/auth/login/'
+    back_url = request.referrer 
+
+    if back_url is not default:
+        back_url = back_url
+        print(back_url)
+
     form = login_form()
+
     if form.validate_on_submit():
         try:
             user = User.query.filter_by(email=form.email.data).first()
             if check_password_hash(user.pwd, form.pwd.data):
                 login_user(user)
-                flash(f"You've been logged in", "success")
-                return redirect(url_for('index'))
+                # flash(f"You've been logged in", "success")
+                # return redirect(url_for('index')) 
+                return redirect(redirect_url())
             else:
                 flash("Invalid Username or password!", "danger")
         except:
-            flash("Invalid Username or password!", "danger")
+            flash("An Unknown error occured", "danger")
 
     return render_template("auth/login.html", form=form)
 

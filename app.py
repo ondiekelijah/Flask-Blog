@@ -54,7 +54,9 @@ def create_app():
     
     class MyModelView(ModelView):
         def is_accessible(self):
-            access = current_user.is_authenticated and current_user.is_administrator()
+            # Change permissions here !!!
+            access = current_user.is_authenticated 
+            # and current_user.is_administrator()
             return access
         
     admin = Admin(app,name='Infokit Admin', template_mode='bootstrap3')

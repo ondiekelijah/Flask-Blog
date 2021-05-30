@@ -5,25 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> {% block title%} {% endblock %} </title>
+    <!-- JQUERY -->
     <script src="{{url_for('static',filename='js/jquery.js')}}"></script>
     <script src="https://kit.fontawesome.com/f8c35ce017.js" crossorigin="anonymous"></script>
+    <!-- FONT AWASOME -->
     <link rel='stylesheet prefetch'
         href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP CDN -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"
         integrity="sha512-bkRnY+Yd8OOKaLeSQ4ywl+eeJKIbJ5TtBvyWwM2OnsV1qeIZb2yi7E4h2P6XVcAMz3ldrTKAXk/lC5vvZnDkZw=="
         crossorigin="anonymous"></script>
+    <!-- PLUGINS -->
     <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
 
     <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+    <!-- INTERNAL PLUGINS -->
     <script src="{{url_for('static',filename='plugins/tinymce/jquery.tinymce.min.js')}}"></script>
     <script src="{{url_for('static',filename='plugins/tinymce/tinymce.min.js')}}"></script>
     <script src="{{url_for('static',filename='plugins/tinymce/init-tinymce.js')}}"></script>
+
+    <!-- GOOGLE FONTS -->
 
     <link href="https://fonts.googleapis.com/css?family=Chivo:300,700|Playfair+Display:700i" rel="stylesheet">
     <link
@@ -56,7 +63,8 @@
         <div class="mr-auto bd-highlight">Call us +254 768 144877</div>
 
         <div class="bd-highlight">
-            Donate / Support
+            <img src="/static/images/main/img.buymeacoffee.com.jpeg"><a href="https://www.buymeacoffee.com/Teksad">Buy
+                Teksade coffee</a>
         </div>
     </div>
     <nav class="navbar navbar-expand-md sticky-top">
@@ -83,9 +91,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
-
-                    {% if current_user.is_administrator() %}
-
+                    <!-- Make changes Here!! -->
+                    {% if current_user.is_authenticated %}
+                    <!--                     is_administrator() 
+ -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,27 +143,30 @@
                         <ul>
                             <li><i class="ion-ios-arrow-right"></i> <a href="{{ url_for('index') }}">Home</a></li>
                             <li><i class="ion-ios-arrow-right"></i> <a href="{{ url_for('index') }}">About Us</a></li>
-                            <li><i class=" ion-ios-arrow-right"></i> <a href="{{ url_for('blog.blog') }}">Blog</a></li>
-                            <li><i class="ion-ios-arrow-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="ion-ios-arrow-right"></i> <a href="#">Privacy policy</a></li>
+                            <li><i class="ion-ios-arrow-right"></i> <a href="{{ url_for('index') }}">Tech</a></li>
+                            <li><i class="ion-ios-arrow-right"></i> <a href="{{ url_for('index') }}">Business</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-contact">
                         <h4>Find Us</h4>
                         <p>
-                            Infokit Solutions, <br>
+                            Teksade Inc, <br>
                             Nairobi, Kenya<br>
 
-                            <strong>Phone:</strong>0768144877<br>
+                            <strong>Phone:</strong>+254768144877<br>
                             <strong>Email:</strong> infokit.ke@gmail.com<br>
                         </p>
 
                         <div class="social-links">
-                            <a href="#" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="instagram" target="_blank"><i class="fa fa-instagram"></i></a>
-                            <a href="#" class="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            <a href="https://twitter.com/dev_elie" class="twitter" target="_blank"><i
+                                    class="fa fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/ondiek.elijah/" class="facebook" target="_blank"><i
+                                    class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/Dev_Elie/" class="instagram" target="_blank"><i
+                                    class="fa fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/ondiek-elijah-2aaba4198/" class="linkedin"
+                                target="_blank"><i class="fa fa-linkedin"></i></a>
                         </div>
 
                     </div>
@@ -166,7 +178,8 @@
                             you unnotified
                         </p>
                         <form action="" method="post">
-                            <input type="email" name="email" class="text-dark"><input type="submit" value="Subscribe">
+                            <input type="email" name="email" class="text-dark" disabled><input type="submit"
+                                value="Subscribe" disabled>
                         </form>
                     </div>
 
@@ -175,7 +188,8 @@
                     <p id="footer-text" class="">Copyright &copy; All Right Reserved
                         <script type="text/javascript">
                             document.write(new Date().getFullYear());
-                        </script>&nbsp;Web Shrewd
+                        </script>&nbsp;. Designed by <a href="https://dev-elie.netlify.app/"
+                            style="color:#448AFF;">Teksade</a>
                     </p>
                 </div>
             </div>
@@ -200,7 +214,6 @@
             }, 3000);
 
         }
-
     </script>
     <script src="{{url_for('static',filename='js/main.js')}}"></script>
     <script src="{{url_for('static',filename='js/sweetalert.min.js')}}"></script>

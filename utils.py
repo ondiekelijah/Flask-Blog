@@ -76,3 +76,8 @@ def save_img(form_img):
 
     return picture_fn
 
+def redirect_url(default='index'):
+    return request.args.get('next') or \
+           back_url or \
+           url_for(default)
+           

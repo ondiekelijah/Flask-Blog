@@ -49,7 +49,8 @@
             <img alt="post image" id="blog-article-image" src="/static/images/blog-posts/{{ post.postImage }}">
           </div>
           <p class="post-content"> {{ post.body|safe }} </p>
-          <div class="w3-container">
+
+          <div class="w3-container" id="reload-comments">
             <hr class="w3-clear">
             <div class="author">
               <img src="/static/images/ProfileImages/{{ post.author.image }}" alt="Author" class="about-author-image">
@@ -67,7 +68,23 @@
                 <img src="/static/images/ProfileImages/{{ comment.rimage }}" alt="Image" class="author-image mr-auto">
               </div>
 
-              <div class="comments-message col-sm-8">
+              <div class="comments-message col-sm-8" id="comments-main-section">
+
+                <div class="alerts mt-2">
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+                  {% if messages %}
+                  {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                    <!-- <strong>Title</strong> --> {{ message }}
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                  {% endwith %}
+                </div>
+
                 <a href="{{ url_for('blog.profile',uname = comment.respondent ) }}">{{ comment.respondent}}</a>
                 <p class="comment-p">{{comment.message|safe}}</p>
                 <p class="comment-posted-date">{{ comment.date_posted.strftime('%B  %d  ,  %Y ') }}</p>
@@ -78,23 +95,26 @@
                   {%for reply in replies%}
                   {% if reply.comment_id == comment.id  %}
                   <div class="reply-content">
-                    <span> {{ reply.author }} </span> <p>  {{ reply.message }} </p>
+                    <span> {{ reply.author }} </span>
+                    <p> {{ reply.message }} </p>
                   </div>
                   {%endif%}
                   {%endfor%}
                 </div>
 
                 <div class="majorpoints">
-                  <img src="/static/images/icons/reply.svg" alt="Reply" class="comment-reply-icon" onclick="showForm()">Reply
+                  <img src="/static/images/icons/reply.svg" alt="Reply" class="comment-reply-icon"
+                    onclick="showForm()">Reply
                   <div class="hiders" style="display:none">
-                
-                    <form method="POST" action="{{ url_for('blog.replyHandler',comment_id = comment.id) }}" id="comment-reply-form">
+
+                    <form method="POST" action="{{ url_for('blog.replyHandler',comment_id = comment.id) }}"
+                      id="comment-reply-form">
                       {{ form.csrf_token }}
-                
+
                       {{ form.reply(class_="w3-input w3-border w3-hover-border-blue newsletter-email" ,onfocus="this.value=''",placeholder="Reply...")}}
                       <br>
                       <button type="submit" class="btn btn-primary" id="reply-comment-button">Reply</button>
-                      
+
                     </form>
                   </div>
                 </div>
@@ -147,7 +167,7 @@
             </form>
             {% else %}
 
-            <button class="btn w3-left btn-outline-primary rounded-pill " id="login-comment-post"><a class=""
+            <button class="btn w3-left btn-outline-primary rounded-pill " id="login-comment-post" onclick ="window.location.href;"><a class=""
                 href="{{ url_for('auth.login') }}">Log in to comment</a></button>
             {% endif %}
           </div>

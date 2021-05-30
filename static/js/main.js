@@ -142,4 +142,11 @@ $('.majorpoints').click(function(){
   $(this).find('.hiders').show();
 });
 
-
+// Reload comments automatically
+// $(document).ready( function() {
+//   $('#comment-post').click(function() {
+//      $.ajax("{{ url_for('blog.article') }}").done(function (reply) {
+//         $('#comments-main-section').html(reply);
+//      });
+//   });
+// });

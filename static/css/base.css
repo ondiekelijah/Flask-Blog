@@ -35,6 +35,15 @@ body{
   text-decoration: none;
   color: #ffffff;
 }
+.bd-highlight img{
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.bd-highlight a:hover{
+  text-decoration: underline;
+  color: #ffffff;
+}
 /* ----------------------- */
 /* nav bar styling */
 .navbar .nav-item:not(:last-child) {

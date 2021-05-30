@@ -1,3 +1,4 @@
+#Comment lines 1-75 when inserting user roles and when creating a database using mirate
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -78,6 +79,7 @@ def create_app():
 
 
 # Use this to insert db roles
+# Uncomment lines 80- 105 when inserting roles,comment the above
 # from flask import Flask
 # from flask_sqlalchemy import SQLAlchemy
 # from flask_bcrypt import Bcrypt
@@ -105,6 +107,7 @@ def create_app():
 #     return app
 
 # Inserting User roles
+# Use these lines to avaoid "out of context" errors
 # from app import create_app
 # app = create_app()
 # app.app_context().push()

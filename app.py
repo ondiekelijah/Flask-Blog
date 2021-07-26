@@ -1,4 +1,3 @@
-#Comment lines 1-75 when inserting user roles and when creating a database using mirate
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -34,7 +33,7 @@ def create_app():
     app.secret_key = "secret-key"
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "mysql+mysqlconnector://user_name:pwd@localhost/database_name"
+    ] = "mysql+mysqlconnector://user_name:database_pwd@localhost/database_name"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config['INFOKIT_ADMIN'] = "*********@gmail.com"
 

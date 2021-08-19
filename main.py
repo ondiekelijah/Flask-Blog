@@ -1,10 +1,10 @@
 from flask import Blueprint
 from flask import current_app
-from .app import create_app
-from .app import login_manager
-from .models import *
-from .forms import *
-from .decorators import admin_required, moderator_required, permission_required
+from app import create_app
+from app import login_manager
+from models import *
+from forms import *
+from decorators import admin_required, moderator_required, permission_required
 
 from flask import (
     Flask,

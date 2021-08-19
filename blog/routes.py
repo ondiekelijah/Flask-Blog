@@ -3,13 +3,13 @@ from flask import Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_,and_
 from .form import *
-from ..utils import *
-from ..decorators import admin_required, permission_required
+from utils import *
+from decorators import admin_required, permission_required
 
 # from .. import app
 from flask import current_app
 from wtforms import ValidationError, validators
-from ..app import db, bcrypt, login_manager
+from app import db, bcrypt, login_manager
 from flask_login import (
     UserMixin,
     login_required,
@@ -39,9 +39,9 @@ from sqlalchemy.exc import (
 )
 from PIL import Image
 from flask_bcrypt import generate_password_hash, check_password_hash
-from ..models import *
+from models import *
 from flask_msearch import Search
-from ..app import search
+from app import search
 
 bp = Blueprint("blog", __name__, url_prefix="/blog")
 
@@ -292,11 +292,7 @@ def update_article(post_id, slug):
         legend="Update Post",
     )
 
-@bp.route(
-    "/<int:post_id>/<string:slug>/delete",
-    methods=("GET", "POST"),
-    strict_slashes=False,
-)
+@bp.route("/<int:post_id>/<string:slug>/delete",methods=("GET", "POST"),strict_slashes=False,)
 @login_required
 @admin_required
 def delete_article(post_id, slug):

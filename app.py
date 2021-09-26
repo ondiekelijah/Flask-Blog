@@ -16,6 +16,8 @@ from flask_login import (
 )
 from flask_msearch import Search
 # from .config import Config
+from dotenv import load_dotenv
+
 login_manager = LoginManager()
 login_manager.session_protection = "strong"
 login_manager.login_view = "auth.login"
@@ -25,15 +27,17 @@ migrate = Migrate()
 moment = Moment()
 bcrypt = Bcrypt()
 search = Search()
+env_configs = load_dotenv()
+
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = "secret-key"
+    app.secret_key = os.getenv("SECRET_KEY")
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "mysql+mysqlconnector://elie:dev123@localhost/blog"
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config['INFOKIT_ADMIN'] = "*********@gmail.com"
+    ] = os.getenv("SQLALCHEMY_DATABASE_URI")
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS")
+    app.config['ADMIN_EMAIL'] = os.getenv("ADMIN_EMAIL")
 
     login_manager.init_app(app)
     db.init_app(app)
@@ -42,6 +46,7 @@ def create_app():
     bcrypt.init_app(app)
     search.init_app(app)
     bcrypt.init_app(app)
+    env_configs.init_app(app)
 
     
     @login_manager.user_loader
@@ -51,9 +56,9 @@ def create_app():
     class MyModelView(ModelView):
         def is_accessible(self):
             # Change permissions here !!!
-            access = current_user.is_authenticated 
+            # access = current_user.is_authenticated 
             # and current_user.is_administrator()
-            return access
+            return True
         
     admin = Admin(app,name='Infokit Admin', template_mode='bootstrap3')
     from models import User,Post,Comments,Role,Replies

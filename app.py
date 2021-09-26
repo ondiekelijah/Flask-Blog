@@ -31,7 +31,7 @@ def create_app():
     app.secret_key = "secret-key"
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "mysql+mysqlconnector://user_name:database_pwd@localhost/database_name"
+    ] = "mysql+mysqlconnector://elie:dev123@localhost/blog"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config['INFOKIT_ADMIN'] = "*********@gmail.com"
 

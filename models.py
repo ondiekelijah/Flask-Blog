@@ -82,7 +82,7 @@ class User(UserMixin, db.Model):
     	super(User, self).__init__(**kwargs)
     	if self.role is None:
     		# check if the new user is set up as the admin, and gives them admin permissions
-    		if self.email == current_app.config['INFOKIT_ADMIN']:
+    		if self.email == current_app.config['ADMIN']:
     			self.role = Role.query.filter_by(permissions=0xff).first()
     		if self.role is None:
     			self.role = Role.query.filter_by(default=True).first()

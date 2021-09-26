@@ -199,6 +199,7 @@ def new_post():
                 body = form.body.data
                 category = form.category.data
                 s_category = form.s_category.data
+                
                 post = Post(
                     title=title,
                     postImage=postImage,

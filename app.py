@@ -46,7 +46,6 @@ def create_app():
     bcrypt.init_app(app)
     search.init_app(app)
     bcrypt.init_app(app)
-    env_configs.init_app(app)
 
     
     @login_manager.user_loader
@@ -55,10 +54,8 @@ def create_app():
     
     class MyModelView(ModelView):
         def is_accessible(self):
-            # Change permissions here !!!
-            # access = current_user.is_authenticated 
-            # and current_user.is_administrator()
-            return True
+            access = current_user.is_authenticated and current_user.is_administrator()
+            return access
         
     admin = Admin(app,name='Infokit Admin', template_mode='bootstrap3')
     from models import User,Post,Comments,Role,Replies

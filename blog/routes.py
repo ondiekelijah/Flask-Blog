@@ -65,7 +65,7 @@ def blog():
         .paginate(page=page, per_page=6)
     )
     return render_template(
-        "blog/blog.html", posts=posts, trending=trending, title="Teksade | Home"
+        "blog/blog.html", posts=posts, trending=trending, title="Devsate | Home"
     )
 
 
@@ -83,12 +83,12 @@ def search():
         "blog/search_results.html",
         label="Search Results",
         posts=posts,
-        title="Teksade | Home",
+        title="Devsate | Home",
     )
     return render_template(
         "blog/search_results.html",
         label="Search Results",
-        title="Teksade | Home",
+        title="Devsate | Home",
     )
 
 
@@ -115,7 +115,7 @@ def tech():
         posts=posts,
         trending=trending,
         form=form,
-        title="Teksade | Home",
+        title="Devsate | Home",
     )
 
 
@@ -136,7 +136,7 @@ def bs():
         posts=posts,
         trending=trending,
         form=form,
-        title="Teksade | Home",
+        title="Devsate | Home",
     )
 
 
@@ -180,7 +180,7 @@ def article(post_id, uname, slug):
         form=form,
         comments=comments,
         replies=replies,
-        title="Teksade | Blog",
+        title="Devsate | Blog",
     )
 
 
@@ -236,7 +236,7 @@ def new_post():
         "blog/add.html",
         form=form,
         posts=posts,
-        title="Teksade | Blog",
+        title="Devsate | Blog",
         legend="Create a new blog article",
     )
 
@@ -289,7 +289,7 @@ def update_article(post_id, slug):
         "blog/add.html",
         form=form,
         post=post,
-        title="Teksade|Blog-update post",
+        title="Devsate|Blog-update post",
         legend="Update Post",
     )
 
@@ -324,7 +324,7 @@ def profile(uname):
         image=image,
         posts=posts,
         user=user,
-        title="Teksade | Profile",
+        title="Devsate | Profile",
     )
 
 
@@ -363,7 +363,7 @@ def subscribe():
     return render_template(
         "blog/article.html",
         form=form,
-        title="Teksade | Blog",
+        title="Devsate | Blog",
     )
 # Comments reply route handler
 @bp.route("/<int:comment_id>/replyComment/", methods=("GET", "POST"), strict_slashes=False)

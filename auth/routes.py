@@ -48,47 +48,49 @@ def load_user(user_id):
 def register():
     form = register_form()
     if form.validate_on_submit():
-        # try:
-        uname = form.uname.data
-        email = form.email.data
-        pwd = form.pwd.data
-        fname = form.fname.data
-        lname = form.lname.data
-        newuser = User(
+        try:
+            uname = form.uname.data
+            email = form.email.data
+            pwd = form.pwd.data
+            fname = form.fname.data
+            lname = form.lname.data
+
+            newuser = User(
                 uname=uname,
                 email=email,
                 pwd=bcrypt.generate_password_hash(pwd),
                 fname=fname,
                 lname=lname,
             )
-        db.session.add(newuser)
-        db.session.commit()
-        flash(f"Account Succesfully created", "success")
-        return redirect(url_for("auth.login"))
-        # except InvalidRequestError:
-        #     db.session.rollback()
-        #     flash(f"Something went wrong!", "danger")
-        # except IntegrityError:
-        #     db.session.rollback()
-        #     flash(f"User already exists!.", "warning")
-        # except DataError:
-        #     db.session.rollback()
-        #     flash(f"Invalid Entry", "warning")
-        # except InterfaceError:
-        #     db.session.rollback()
-        #     flash(f"Error connecting to the database", "danger")
-        # except DatabaseError:
-        #     db.session.rollback()
-        #     flash(f"Error connecting to the database", "danger")
-        # except BuildError:
-        #     db.session.rollback()
-        #     flash(f"An error occured !", "danger")
+
+            db.session.add(newuser)
+            db.session.commit()
+            flash(f"Account Succesfully created", "success")
+            return redirect(url_for("auth.login"))
+
+        except InvalidRequestError:
+            db.session.rollback()
+            flash(f"Something went wrong!", "danger")
+        except IntegrityError:
+            db.session.rollback()
+            flash(f"User already exists!.", "warning")
+        except DataError:
+            db.session.rollback()
+            flash(f"Invalid Entry", "warning")
+        except InterfaceError:
+            db.session.rollback()
+            flash(f"Error connecting to the database", "danger")
+        except DatabaseError:
+            db.session.rollback()
+            flash(f"Error connecting to the database", "danger")
+        except BuildError:
+            db.session.rollback()
+            flash(f"An error occured !", "danger")
     return render_template("auth/register.html", form=form)
 
 # lOGIN route
 @auth.route("/login/", methods=("GET", "POST"), strict_slashes=False)
 def login():
-    default = 'http://127.0.0.1:5000/auth/login/'
 
     form = login_form()
 

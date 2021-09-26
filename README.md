@@ -4,87 +4,79 @@
 [![GitHub forks](https://img.shields.io/github/forks/Dev-Elie/Search-Weather-Wordnet-Location-Web-App)](https://github.com/Dev-Elie/Search-Weather-Wordnet-Location-Web-App/network)
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2F)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FDev-Elie%2FSearch-Weather-Wordnet-Location-Web-App)
 
-# Description
-A fully functional blog website with CRUD capabilities. Developed using Python Flask framework and MySQL. 
-#### Enables a user to:
-* Create an account
-* Login
-* Update Account info
-* Comment to posts
-* Reply to comments on posts
-#### Admin can;
-* Add new posts
-* Add new users
-* Delete Posts
-* Delete and Edit User info
-* Delete, moderate and Edit comments
+### Requirements ,Packages used and Installation
+Download and install Python, for this tutorial I'll be using Python 3.8.5, make sure to check the box Add Python to PATH on the installation setup screen
+ 
+### Installation
+          
+Navigate to your current project directory for this case it will be **Truck-Hiring-Web-App**. <br>
+          
+### 1 .Clone the git repo and create an environment 
+          
+Depending on your operating system,make a virtual environment to avoid messing with your machine's primary dependencies
+          
+**Windows**
+          
+```
+git clone https://github.com/Dev-Elie/Teksade-Blog.git
+cd Teksade-Blog
+py -3 -m venv venv
 
-**NB:** Commands issued are for a linux environment,however no one is limited.
-# Fallbacks
-> When executing the migrate commands to create a new database and when insering user roles,often a **Circular import error is raised**.
-> To fix or avoid this,check on the app.py file and do the following
-  * Do an inverse operation like this,comment line **1-75**
-  * Uncomment lines **78-103**
-> Next,check the models.py,do the following
-  * Comment line **1**
-  * Uncomment line **11**
-  Proceed with the steps as shown below from installation
-  
-  **NB:** After the database migration and after inserting the user roles. Reverse the actions performed above before launching the application
+```
+          
+**macOS/Linux**
+          
+```
+git clone https://github.com/Dev-Elie/Teksade-Blog.git
+cd Teksade-Blog
+python3 -m venv venv
 
-# Installation
-1. Create a new folder for the project and navigate into it
-```
-$ mkdir my_project
-$ cd my_project
-```
-2.Inside the newly created folder create a virtual environment
-```
- $ Python3.9 -m venv < env name>
-```
-3. Create another folder,name it "main",navigate to it and clone to it the applicatons files.
-```
-mkdir main
-cd main
-$ git clone https://github.com/Dev-Elie/Teksade-Blog.git
-```
-# Usage
-1. Activate the virtual environment
-```
-$. venv/bin/activate
-OR
-$ source venv/bin/activate
-``` 
-2. Navigate into the "main" folder and install the requirements.
-```
-$ pip install -r requirements.txt
-```
-3. Use Migrate to create a new database
-```
-$ flask db init
-$ flask db migrate -m "Initial migration."
-$ flask db upgrade
-```
-4. Insert User Roles
-```
-$ from app import create_app
-$ app = create_app()
-$ app.app_context().push()
-$ from models import Role
-$ from app import db
-$ Role.insert_roles()
-$ Role.query.all()
 ```
 
-6. Make the run file an executable
+### 2 .Activate the environment
+          
+**Windows** 
+
+```venv\Scripts\activate```
+          
+**macOS/Linux**
+
+```. venv/bin/activate```
+or
+```source venv/bin/activate```
+
+### 3 .Install the requirements
+
+Applies for windows/macOS/Linux
+
+```pip install -r requirements.txt```
+
+### 4 .Migrate/Create a database
+
+Applies for windows/macOS/Linux
+
+```python manage.py```
+
+### 5. Run the application 
+
+**For linux and macOS**
+Make the run file executable by running the code
+
+```chmod 777 run```
+
+Then start the application by executing the run file
+
+```./run```
+
+**On windows**
 ```
-$ chmod 777 run
+set FLASK_APP=main
+flask run
+
 ```
-6. Launch the application
-```
-$ ./run
-```
-# Preview
-![Home](https://github.com/Dev-Elie/Portfolio/blob/main/images/projects/blog.png)
+The run file incase missing,create a new file name it **run** then add the following;
+
+```FLASK_APP=main.py FLASK_DEBUG=1 FLASK_ENV=development flask run```
+
 
 Liked this project ? Let's tweet about it [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2F)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FDev-Elie%2FSearch-Weather-Wordnet-Location-Web-App)

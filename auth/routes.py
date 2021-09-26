@@ -58,7 +58,7 @@ def register():
             newuser = User(
                 uname=uname,
                 email=email,
-                pwd=bcrypt.generate_password_hash(pwd),
+                pwd=bcrypt.generate_password_hash(pwd).decode('utf-8'),
                 fname=fname,
                 lname=lname,
             )

@@ -70,7 +70,7 @@ class User(UserMixin, db.Model):
     image = db.Column("image", db.String(150), default="user-icon.svg")
     uname = db.Column("uname", db.String(10), nullable=False, index=True, unique=True)
     email = db.Column("email", db.String(64), unique=True, nullable=False, index=True)
-    pwd = db.Column("pwd", db.String(72), nullable=False, unique=True)
+    pwd = db.Column("pwd", db.String(300), nullable=False, unique=True)
     fname = db.Column("Fname", db.String(20), nullable=False)
     lname = db.Column("Lname", db.String(20), nullable=False)
     about = db.Column(db.Text, nullable=True)

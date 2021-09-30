@@ -34,7 +34,7 @@ def create_app():
     app.secret_key = os.getenv("SECRET_KEY")
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = os.getenv("DATABASE_URL")
+    ] = os.getenv("HEROKU_POSTGRESQL_CHARCOAL_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS")
     app.config['ADMIN_EMAIL'] = os.getenv("ADMIN_EMAIL")
 

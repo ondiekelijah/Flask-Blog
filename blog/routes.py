@@ -40,8 +40,6 @@ from sqlalchemy.exc import (
 from PIL import Image
 from flask_bcrypt import generate_password_hash, check_password_hash
 from models import *
-from flask_msearch import Search
-from app import search
 
 bp = Blueprint("blog", __name__, url_prefix="/blog")
 

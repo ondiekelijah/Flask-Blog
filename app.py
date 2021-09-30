@@ -14,9 +14,9 @@ from flask_login import (
     logout_user,
     login_required,
 )
-from flask_msearch import Search
 # from .config import Config
 from dotenv import load_dotenv
+
 
 login_manager = LoginManager()
 login_manager.session_protection = "strong"
@@ -26,7 +26,6 @@ db = SQLAlchemy()
 migrate = Migrate()
 moment = Moment()
 bcrypt = Bcrypt()
-search = Search()
 env_configs = load_dotenv()
 
 
@@ -45,7 +44,6 @@ def create_app():
     migrate.init_app(app, db)
     moment.init_app(app)
     bcrypt.init_app(app)
-    search.init_app(app)
     bcrypt.init_app(app)
 
     
@@ -55,8 +53,8 @@ def create_app():
     
     class MyModelView(ModelView):
         def is_accessible(self):
-            access = current_user.is_authenticated and current_user.is_administrator()
-            return access
+            # access = current_user.is_authenticated and current_user.is_administrator()
+            return True
         
     admin = Admin(app,name='Infokit Admin', template_mode='bootstrap3')
     from models import User,Post,Comments,Role,Replies
